@@ -40,8 +40,8 @@ public class Product {
         return productQuantity;
     }
 
-    public int getProductDate() {
-        return productQuantity;
+    public Date getProductDate() {
+        return productDate;
     }
 
     // setter

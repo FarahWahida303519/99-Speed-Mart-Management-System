@@ -1,3 +1,4 @@
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -45,13 +46,32 @@ public class DatabaseConnection {
         return productList;
     }
 
+    // Add product
+    public static void addRecord(Product prod) throws SQLException {
+        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+
+        String sql = "INSERT INTO product(ProductID,ProductName,ProductPrice,ProductQuantity,ProductDate) values(?,?,?,?,?)";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, prod.getProductID());
+        stmt.setString(2, prod.getProductName());
+        stmt.setDouble(3, prod.getProductPrice());
+        stmt.setInt(4, prod.getProductQuantity());
+        stmt.setDate(5, prod.getProductDate());
+
+        int count = stmt.executeUpdate();
+        System.out.println("The number of inserted product : " + count);
+        stmt.close();
+        connection.close();
+
+    }
+
     // searchingName
     public static Product searchName(String searchName) throws SQLException {
 
         Product prod = null;
         Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
-        String sql = "SELECT * FROM product where productName = ? ";
+        String sql = "SELECT * FROM product where ProductName = ? ";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, searchName);
         ResultSet rs = stmt.executeQuery();
@@ -81,7 +101,7 @@ public class DatabaseConnection {
         Product prod = null;
         Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
-        String sql = "SELECT * FROM product where productID = ? ";
+        String sql = "SELECT * FROM product where ProductID = ? ";
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, searchID);
         ResultSet rs = stmt.executeQuery();
@@ -102,6 +122,40 @@ public class DatabaseConnection {
         stmt.close();
         connection.close();
         return prod;
+    }
 
+    // Update Data
+    public static int updateData(Product prod) throws SQLException {
+        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+
+        String sql = "UPDATE product SET ProductName = ?,ProductPrice = ?,ProductQuantity = ?,ProductDate = ? WHERE ProductID = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+
+        stmt.setString(1, prod.getProductID());
+        stmt.setString(2, prod.getProductName());
+        stmt.setDouble(3, prod.getProductPrice());
+        stmt.setInt(4, prod.getProductQuantity());
+        stmt.setDate(5, prod.getProductDate());
+
+        int row = stmt.executeUpdate();
+        System.out.println("rows afffected = " + row);
+        stmt.close();
+        connection.close();
+        return row;
+    }
+
+    // delete by id
+    public static int DeleteRecord(String DeletedByID) throws SQLException {
+        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+
+        String sql = "DELETE FROM product WHERE ProductID = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, DeletedByID);
+
+        int row = stmt.executeUpdate();
+        System.out.println("Affected Row : " + row);
+        stmt.close();
+        connection.close();
+        return row;
     }
 }
