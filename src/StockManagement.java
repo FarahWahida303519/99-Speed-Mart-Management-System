@@ -24,6 +24,7 @@ public class StockManagement extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -46,11 +47,12 @@ public class StockManagement extends javax.swing.JFrame {
         rbnProductName = new javax.swing.JRadioButton();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        TADisplay = new javax.swing.JTextArea();
         btnBack = new javax.swing.JButton();
         txtSearchProductBy = new javax.swing.JTextField();
         lblStockQuantity1 = new javax.swing.JLabel();
         JDCProduct = new com.toedter.calendar.JDateChooser();
+        btnDisplay = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,6 +82,7 @@ public class StockManagement extends javax.swing.JFrame {
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnUpdate.setText("Update");
 
+        btnDelete.setBackground(new java.awt.Color(255, 0, 51));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -110,9 +113,9 @@ public class StockManagement extends javax.swing.JFrame {
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSearch.setText("Search");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        TADisplay.setColumns(20);
+        TADisplay.setRows(5);
+        jScrollPane1.setViewportView(TADisplay);
 
         btnBack.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBack.setText("Back To Menu");
@@ -125,6 +128,13 @@ public class StockManagement extends javax.swing.JFrame {
         lblStockQuantity1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblStockQuantity1.setText(" Date                  :");
 
+        btnDisplay.setText("Display Record");
+        btnDisplay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDisplayActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,7 +143,9 @@ public class StockManagement extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(186, 186, 186)
-                                                .addComponent(btnSearch))
+                                                .addComponent(btnSearch)
+                                                .addGap(40, 40, 40)
+                                                .addComponent(btnDelete))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(192, 192, 192)
                                                 .addComponent(lblTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 189,
@@ -145,9 +157,7 @@ public class StockManagement extends javax.swing.JFrame {
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(btnAdd)
                                                 .addGap(50, 50, 50)
-                                                .addComponent(btnUpdate)
-                                                .addGap(46, 46, 46)
-                                                .addComponent(btnDelete))
+                                                .addComponent(btnUpdate))
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
@@ -186,7 +196,14 @@ public class StockManagement extends javax.swing.JFrame {
                                                                         javax.swing.GroupLayout.Alignment.LEADING,
                                                                         javax.swing.GroupLayout.DEFAULT_SIZE, 279,
                                                                         Short.MAX_VALUE)
-                                                                .addComponent(btnClear)
+                                                                .addGroup(layout.createSequentialGroup()
+                                                                        .addGap(76, 76, 76)
+                                                                        .addComponent(btnDisplay)
+                                                                        .addPreferredGap(
+                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                Short.MAX_VALUE)
+                                                                        .addComponent(btnClear))
                                                                 .addComponent(txtProductQuantity,
                                                                         javax.swing.GroupLayout.Alignment.LEADING)
                                                                 .addComponent(txtProductName,
@@ -255,8 +272,8 @@ public class StockManagement extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(btnAdd)
                                         .addComponent(btnUpdate)
-                                        .addComponent(btnDelete)
-                                        .addComponent(btnClear))
+                                        .addComponent(btnClear)
+                                        .addComponent(btnDisplay))
                                 .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(txtSearchProductBy, javax.swing.GroupLayout.PREFERRED_SIZE,
@@ -269,7 +286,9 @@ public class StockManagement extends javax.swing.JFrame {
                                         .addComponent(rbnProductName))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
                                         javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSearch)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnSearch)
+                                        .addComponent(btnDelete))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176,
                                         javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -279,6 +298,26 @@ public class StockManagement extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnDisplayActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDisplayActionPerformed
+        try {
+            // clear text area first
+            TADisplay.setText("PRODUCT LIST\n-----------------------------");
+
+            // get data from database
+            ArrayList<Product> productList = DatabaseConnection.readData();
+
+            // display each product
+            for (Product p : productList) {
+                TADisplay.append(p.toString());
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Failed to retrieve data from database.", "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }// GEN-LAST:event_btnDisplayActionPerformed
 
     // instance variable
     private String productID, productName;
@@ -305,20 +344,24 @@ public class StockManagement extends javax.swing.JFrame {
 
         try {
             initialize();
-            
-            //if user not enter any input
+
+            // if user not enter any input
             if (txtProductID.getText().isEmpty()
-                || txtProductName.getText().isEmpty()
-                || txtProductPrice.getText().isEmpty()
-                || txtProductQuantity.getText().isEmpty()
-                || JDCProduct.getDate() == null) {
+                    || txtProductName.getText().isEmpty()
+                    || txtProductPrice.getText().isEmpty()
+                    || txtProductQuantity.getText().isEmpty()
+                    || JDCProduct.getDate() == null) {
 
                 JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+
                 return;
             }
+
             DatabaseConnection.addRecord(prod);
+
             JOptionPane.showMessageDialog(this, "Record added successfully!", "Success",
                     JOptionPane.INFORMATION_MESSAGE);
+            TADisplay.append(prod.toString());
 
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -333,7 +376,12 @@ public class StockManagement extends javax.swing.JFrame {
     }// GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnClearActionPerformed
-        // TODO add your handling code here:
+        txtProductID.setText("");
+        txtProductName.setText("");
+        txtProductPrice.setText("");
+        txtProductQuantity.setText("");
+        JDCProduct.setDate(null); // reset date chooser
+        TADisplay.setText("");
     }// GEN-LAST:event_btnClearActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
@@ -393,15 +441,16 @@ public class StockManagement extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser JDCProduct;
+    private javax.swing.JTextArea TADisplay;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnDisplay;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lblPricePerUnit;
     private javax.swing.JLabel lblProductID;
     private javax.swing.JLabel lblProductName;

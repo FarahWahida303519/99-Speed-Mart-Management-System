@@ -66,11 +66,7 @@ public class Product {
     public String toString() {
         return String.format(
                 "\n| %s | %s | RM %.2f | %d | %s |\n",
-                productID,
-                productName,
-                productPrice,
-                productQuantity,
-                productDate);
+                productID, productName, productPrice, productQuantity, productDate);
     }
 
 }
