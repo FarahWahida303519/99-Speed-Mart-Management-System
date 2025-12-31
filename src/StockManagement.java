@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.JOptionPane;
 
@@ -25,6 +26,9 @@ public class StockManagement extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -43,8 +47,8 @@ public class StockManagement extends javax.swing.JFrame {
         btnDelete = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         lblSearchProductBy = new javax.swing.JLabel();
-        rbnProductID = new javax.swing.JRadioButton();
-        rbnProductName = new javax.swing.JRadioButton();
+        rbProductID = new javax.swing.JRadioButton();
+        rbProductName = new javax.swing.JRadioButton();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         TADisplay = new javax.swing.JTextArea();
@@ -53,6 +57,7 @@ public class StockManagement extends javax.swing.JFrame {
         lblStockQuantity1 = new javax.swing.JLabel();
         JDCProduct = new com.toedter.calendar.JDateChooser();
         btnDisplay = new javax.swing.JButton();
+        CBSort = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,16 +107,21 @@ public class StockManagement extends javax.swing.JFrame {
         lblSearchProductBy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSearchProductBy.setText("Search Product By :");
 
-        buttonGroup1.add(rbnProductID);
-        rbnProductID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        rbnProductID.setText("Product ID");
+        buttonGroup1.add(rbProductID);
+        rbProductID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        rbProductID.setText("Product ID");
 
-        buttonGroup1.add(rbnProductName);
-        rbnProductName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        rbnProductName.setText("Product Name");
+        buttonGroup1.add(rbProductName);
+        rbProductName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        rbProductName.setText("Product Name");
 
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         TADisplay.setColumns(20);
         TADisplay.setRows(5);
@@ -135,37 +145,69 @@ public class StockManagement extends javax.swing.JFrame {
             }
         });
 
+        CBSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Product ID", "Product Name",
+                "Most Stock Quantity", "Least Stock Quantity", "Newest Date", "Oldest Date", " " }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(186, 186, 186)
-                                                .addComponent(btnSearch)
-                                                .addGap(40, 40, 40)
-                                                .addComponent(btnDelete))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(192, 192, 192)
-                                                .addComponent(lblTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 189,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(192, 192, 192)
+                                .addComponent(lblTittle, javax.swing.GroupLayout.PREFERRED_SIZE, 189,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 150, Short.MAX_VALUE))
                         .addGroup(layout.createSequentialGroup()
                                 .addGap(76, 76, 76)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(btnAdd)
-                                                .addGap(50, 50, 50)
-                                                .addComponent(btnUpdate))
+                                                .addComponent(lblSearchProductBy,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 130,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(txtSearchProductBy,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 249,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(6, 6, 6)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGroup(layout.createParallelGroup(
+                                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addComponent(rbProductID,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                98,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(btnSearch))
+                                                                                .addPreferredGap(
+                                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addGroup(layout.createParallelGroup(
+                                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addGroup(layout
+                                                                                                .createSequentialGroup()
+                                                                                                .addComponent(btnUpdate)
+                                                                                                .addGap(26, 26, 26)
+                                                                                                .addComponent(
+                                                                                                        btnDelete))
+                                                                                        .addComponent(rbProductName,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                                129,
+                                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(btnDisplay)
+                                                                                .addGap(18, 18, 18)
+                                                                                .addComponent(btnClear))))))
+                                        .addComponent(CBSort, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout
                                                         .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(lblSearchProductBy,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 130,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(lblStockQuantity,
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE, 112,
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -182,48 +224,26 @@ public class StockManagement extends javax.swing.JFrame {
                                                                         javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                         javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                         Short.MAX_VALUE)))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGap(24, 24, 24)
                                                 .addGroup(layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtSearchProductBy,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 249,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addGroup(layout
-                                                                .createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                        false)
-                                                                .addComponent(txtProductID,
-                                                                        javax.swing.GroupLayout.Alignment.LEADING,
-                                                                        javax.swing.GroupLayout.DEFAULT_SIZE, 279,
-                                                                        Short.MAX_VALUE)
-                                                                .addGroup(layout.createSequentialGroup()
-                                                                        .addGap(76, 76, 76)
-                                                                        .addComponent(btnDisplay)
-                                                                        .addPreferredGap(
-                                                                                javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                Short.MAX_VALUE)
-                                                                        .addComponent(btnClear))
-                                                                .addComponent(txtProductQuantity,
-                                                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(txtProductName,
-                                                                        javax.swing.GroupLayout.Alignment.LEADING,
-                                                                        javax.swing.GroupLayout.DEFAULT_SIZE, 279,
-                                                                        Short.MAX_VALUE)
-                                                                .addComponent(txtProductPrice,
-                                                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(JDCProduct,
-                                                                        javax.swing.GroupLayout.Alignment.LEADING,
-                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                        Short.MAX_VALUE))))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(51, 51, 51)
-                                                .addComponent(rbnProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 98,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(43, 43, 43)
-                                                .addComponent(rbnProductName, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                false)
+                                                        .addComponent(txtProductID,
+                                                                javax.swing.GroupLayout.Alignment.LEADING,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 279,
+                                                                Short.MAX_VALUE)
+                                                        .addComponent(txtProductQuantity,
+                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(txtProductName,
+                                                                javax.swing.GroupLayout.Alignment.LEADING,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, 279,
+                                                                Short.MAX_VALUE)
+                                                        .addComponent(txtProductPrice,
+                                                                javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(JDCProduct,
+                                                                javax.swing.GroupLayout.Alignment.LEADING,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGap(127, 127, 127)
                                                 .addComponent(btnBack))
@@ -231,7 +251,11 @@ public class StockManagement extends javax.swing.JFrame {
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(lblProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 102,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap(21, Short.MAX_VALUE)));
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAdd)
+                                .addGap(152, 152, 152)));
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -268,27 +292,31 @@ public class StockManagement extends javax.swing.JFrame {
                                         .addComponent(JDCProduct, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(28, 28, 28)
+                                .addGap(10, 10, 10)
+                                .addComponent(btnAdd)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(btnAdd)
-                                        .addComponent(btnUpdate)
-                                        .addComponent(btnClear)
-                                        .addComponent(btnDisplay))
-                                .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(lblSearchProductBy)
                                         .addComponent(txtSearchProductBy, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblSearchProductBy))
-                                .addGap(18, 18, 18)
+                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(rbnProductID)
-                                        .addComponent(rbnProductName))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(rbProductID)
+                                        .addComponent(rbProductName))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(btnSearch)
+                                        .addComponent(btnUpdate)
                                         .addComponent(btnDelete))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32,
+                                        Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(btnDisplay)
+                                        .addComponent(CBSort, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnClear))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176,
                                         javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -299,14 +327,64 @@ public class StockManagement extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSearchActionPerformed
+
+        try {
+            String keyword = txtSearchProductBy.getText().trim();
+            Product prod = null;
+
+            if (keyword.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter a search value.");
+                return;
+            }
+
+            // Search by Product ID
+            if (rbProductID.isSelected()) {
+                prod = DatabaseConnection.searchID(keyword);
+            }
+            // Search by Product Name
+            else if (rbProductName.isSelected()) {
+                prod = DatabaseConnection.searchName(keyword);
+            } else {
+                JOptionPane.showMessageDialog(this, "Please select search type.");
+                return;
+            }
+
+            // If product found
+            if (prod != null) {
+                txtProductID.setText(prod.getProductID());
+                txtProductName.setText(prod.getProductName());
+                txtProductPrice.setText(String.valueOf(prod.getProductPrice()));
+                txtProductQuantity.setText(String.valueOf(prod.getProductQuantity()));
+
+                // convert sql.Date → util.Date for JDateChooser
+                JDCProduct.setDate(new java.util.Date(prod.getProductDate().getTime()));
+
+                JOptionPane.showMessageDialog(this, "Product found.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Product not found.");
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                    "Error while searching product.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }// GEN-LAST:event_btnSearchActionPerformed
+
     private void btnDisplayActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDisplayActionPerformed
         try {
             // clear text area first
-            TADisplay.setText("PRODUCT LIST\n-----------------------------");
+            TADisplay.setText("STOCK LIST\n-----------------------------");
 
             // get data from database
             ArrayList<Product> productList = DatabaseConnection.readData();
+            String sortType = CBSort.getSelectedItem().toString();
 
+            Collections.sort(productList, new ProductSort(sortType));
             // display each product
             for (Product p : productList) {
                 TADisplay.append(p.toString());
@@ -361,6 +439,7 @@ public class StockManagement extends javax.swing.JFrame {
 
             JOptionPane.showMessageDialog(this, "Record added successfully!", "Success",
                     JOptionPane.INFORMATION_MESSAGE);
+            TADisplay.setText("ADD NEW STOCK \n");
             TADisplay.append(prod.toString());
 
         } catch (SQLException ex) {
@@ -382,6 +461,7 @@ public class StockManagement extends javax.swing.JFrame {
         txtProductQuantity.setText("");
         JDCProduct.setDate(null); // reset date chooser
         TADisplay.setText("");
+        txtSearchProductBy.setText("");
     }// GEN-LAST:event_btnClearActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBackActionPerformed
@@ -440,6 +520,7 @@ public class StockManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CBSort;
     private com.toedter.calendar.JDateChooser JDCProduct;
     private javax.swing.JTextArea TADisplay;
     private javax.swing.JButton btnAdd;
@@ -458,8 +539,8 @@ public class StockManagement extends javax.swing.JFrame {
     private javax.swing.JLabel lblStockQuantity;
     private javax.swing.JLabel lblStockQuantity1;
     private javax.swing.JLabel lblTittle;
-    private javax.swing.JRadioButton rbnProductID;
-    private javax.swing.JRadioButton rbnProductName;
+    private javax.swing.JRadioButton rbProductID;
+    private javax.swing.JRadioButton rbProductName;
     private javax.swing.JTextField txtProductID;
     private javax.swing.JTextField txtProductName;
     private javax.swing.JTextField txtProductPrice;
