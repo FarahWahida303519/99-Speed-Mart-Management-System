@@ -359,6 +359,8 @@ public class StockManagement extends javax.swing.JFrame {
 
                 // convert sql.Date → util.Date for JDateChooser
                 JDCProduct.setDate(new java.util.Date(prod.getProductDate().getTime()));
+                TADisplay.setText("STOCK FOUND \n\n");
+                TADisplay.append(prod.toString());
 
                 JOptionPane.showMessageDialog(this, "Product found.");
             } else {
