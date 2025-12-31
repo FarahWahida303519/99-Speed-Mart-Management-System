@@ -29,6 +29,7 @@ public class StockManagement extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -86,6 +87,11 @@ public class StockManagement extends javax.swing.JFrame {
 
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         btnDelete.setBackground(new java.awt.Color(255, 0, 51));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -327,6 +333,51 @@ public class StockManagement extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnUpdateActionPerformed
+
+        try {
+            initialize();
+            if (txtProductID.getText().isEmpty()
+                    || txtProductName.getText().isEmpty()
+                    || txtProductPrice.getText().isEmpty()
+                    || txtProductQuantity.getText().isEmpty()
+                    || JDCProduct.getDate() == null) {
+
+                JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+                return;
+            }
+            txtProductID.setEditable(false);
+
+            int row = DatabaseConnection.updateData(prod);
+            if (row > 0) {
+                JOptionPane.showMessageDialog(this,
+                        "Record updated successfully!",
+                        "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Update failed. Record not found.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            TADisplay.setText("UPDATE STOCK \n\n");
+            TADisplay.append(prod.toString());
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Please enter valid numeric values.",
+                    "Invalid Input",
+                    JOptionPane.ERROR_MESSAGE);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                    "Failed to update record.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }// GEN-LAST:event_btnUpdateActionPerformed
+
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSearchActionPerformed
 
         try {
@@ -420,6 +471,14 @@ public class StockManagement extends javax.swing.JFrame {
         prod = new Product(productID, productName, productPrice, productQuantity, productDate);
     }
 
+    private void refreshRecord() {
+        txtProductID.setText("");
+        txtProductName.setText("");
+        txtProductPrice.setText("");
+        txtProductQuantity.setText("");
+        JDCProduct.setDate(null);
+    }
+
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddActionPerformed
 
         try {
@@ -452,8 +511,50 @@ public class StockManagement extends javax.swing.JFrame {
         }
     }// GEN-LAST:event_btnAddActionPerformed
 
+    // DELETE===
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        try {
+            String DeleteProduct = txtProductID.getText().trim();
+
+            if (DeleteProduct.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please enter or search a Product ID to delete.",
+                        "Missing Product ID", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            int choice = JOptionPane.showConfirmDialog(
+                    this, "Are you sure you want to delete this product?", "Confirm Delete", JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+
+            if (choice != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            int row = DatabaseConnection.DeleteRecord(DeleteProduct);
+
+            if (row > 0) {
+                JOptionPane.showMessageDialog(this,
+                        "Record deleted successfully!",
+                        "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+
+                refreshRecord(); // clear input fields
+                btnDisplayActionPerformed(null); // ✅ REFRESH DISPLAY
+
+            } else {
+                JOptionPane.showMessageDialog(this,
+                        "Delete failed. Record not found.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this,
+                    "Failed to delete record.",
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }// GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnClearActionPerformed

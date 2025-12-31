@@ -126,19 +126,22 @@ public class DatabaseConnection {
 
     // Update Data
     public static int updateData(Product prod) throws SQLException {
+
         Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
-        String sql = "UPDATE product SET ProductName = ?,ProductPrice = ?,ProductQuantity = ?,ProductDate = ? WHERE ProductID = ?";
+        String sql = "UPDATE product SET ProductName = ?, ProductPrice = ?, ProductQuantity = ?, ProductDate = ? WHERE ProductID = ?";
         PreparedStatement stmt = connection.prepareStatement(sql);
 
-        stmt.setString(1, prod.getProductID());
-        stmt.setString(2, prod.getProductName());
-        stmt.setDouble(3, prod.getProductPrice());
-        stmt.setInt(4, prod.getProductQuantity());
-        stmt.setDate(5, prod.getProductDate());
+        //
+        stmt.setString(1, prod.getProductName());
+        stmt.setDouble(2, prod.getProductPrice());
+        stmt.setInt(3, prod.getProductQuantity());
+        stmt.setDate(4, prod.getProductDate());
+        stmt.setString(5, prod.getProductID()); // WHERE clause
 
         int row = stmt.executeUpdate();
-        System.out.println("rows afffected = " + row);
+        System.out.println("rows affected = " + row);
+
         stmt.close();
         connection.close();
         return row;

@@ -19,7 +19,7 @@ public class ProductSort implements Comparator<Product> {
 
     public int compare(Product p1, Product p2) {
 
-        if (sortType.equals("Product Name ")) {
+        if (sortType.equals("Product Name")) {
             return p1.getProductName().compareTo(p2.getProductName());
         }
 
