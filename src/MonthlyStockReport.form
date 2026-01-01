@@ -171,10 +171,13 @@
     <Component class="javax.swing.JComboBox" name="cbxSort">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Name"/>
-            <StringItem index="1" value="Most Quantity"/>
-            <StringItem index="2" value="Least Quantity"/>
+          <StringArray count="6">
+            <StringItem index="0" value="Product Name"/>
+            <StringItem index="1" value="Product ID"/>
+            <StringItem index="2" value="Most Stock Quantity"/>
+            <StringItem index="3" value="Least Stock Quantity"/>
+            <StringItem index="4" value="Newest Date"/>
+            <StringItem index="5" value="Oldest Date"/>
           </StringArray>
         </Property>
       </Properties>
@@ -189,6 +192,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Generate Report"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenerateReportActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
@@ -208,10 +214,11 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable2">
+        <Component class="javax.swing.JTable" name="tblReport">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="9">
+              <Table columnCount="5" rowCount="9">
+                <Column editable="true" title="Date" type="java.lang.Object"/>
                 <Column editable="true" title="Product ID" type="java.lang.Object"/>
                 <Column editable="true" title="Product Name" type="java.lang.Object"/>
                 <Column editable="true" title="Stock Quantity" type="java.lang.Object"/>

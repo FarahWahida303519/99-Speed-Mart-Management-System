@@ -161,4 +161,42 @@ public class DatabaseConnection {
         connection.close();
         return row;
     }
+
+    // filter Data based on month & year
+    public static ArrayList<Product> getMonthlyStock(int month, int year) throws SQLException {
+
+        ArrayList<Product> list = new ArrayList<>();
+        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+
+        String sql = "SELECT * FROM product WHERE MONTH(ProductDate) = ? AND YEAR(ProductDate) = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, month);
+        stmt.setInt(2, year);
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            String productID = rs.getString(1);
+            String productName = rs.getString(2);
+            double productPrice = rs.getDouble(3);
+            int productQuantity = rs.getInt(4);
+            Date productDate = rs.getDate(5);
+
+            Product prod = new Product(
+                    productID,
+                    productName,
+                    productPrice,
+                    productQuantity,
+                    productDate);
+
+            list.add(prod);
+        }
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return list;
+    }
+
 }

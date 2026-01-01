@@ -392,10 +392,13 @@ public class StockManagement extends javax.swing.JFrame {
             // Search by Product ID
             if (rbProductID.isSelected()) {
                 prod = DatabaseConnection.searchID(keyword);
-            }
-            // Search by Product Name
+                txtProductID.setEditable(false);
+
+            } // Search by Product Name
             else if (rbProductName.isSelected()) {
                 prod = DatabaseConnection.searchName(keyword);
+                txtProductID.setEditable(false);
+
             } else {
                 JOptionPane.showMessageDialog(this, "Please select search type.");
                 return;
