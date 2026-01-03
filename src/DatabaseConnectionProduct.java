@@ -56,6 +56,7 @@ public class DatabaseConnectionProduct {
         stmt.setString(2, prod.getProductName());
         stmt.setDouble(3, prod.getProductPrice());
         stmt.setInt(4, prod.getProductQuantity());
+        stmt.setDate(5, prod.getProductDate());
 
         int count = stmt.executeUpdate();
         System.out.println("The number of inserted product : " + count);
@@ -196,6 +197,22 @@ public class DatabaseConnectionProduct {
         connection.close();
 
         return list;
+    }
+
+    public static int reduceStock(String productID, int qty) throws SQLException {
+
+        Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+
+        String sql = "UPDATE product SET ProductQuantity = ProductQuantity - ? WHERE ProductID = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, qty);
+        stmt.setString(2, productID);
+
+        int row = stmt.executeUpdate();
+        stmt.close();
+        conn.close();
+
+        return row;
     }
 
 }

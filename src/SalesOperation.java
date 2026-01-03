@@ -7,6 +7,7 @@
  *
  * @author HP
  */
+
 interface InvoiceGenerator {
     String generate();
 }
