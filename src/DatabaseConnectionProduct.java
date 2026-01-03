@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DatabaseConnection {
+public class DatabaseConnectionProduct {
 
     private static final String URL = "jdbc:mysql://localhost:3306/99_speedmart_db";
     private static final String USER = "root";
@@ -56,7 +56,6 @@ public class DatabaseConnection {
         stmt.setString(2, prod.getProductName());
         stmt.setDouble(3, prod.getProductPrice());
         stmt.setInt(4, prod.getProductQuantity());
-        stmt.setDate(5, prod.getProductDate());
 
         int count = stmt.executeUpdate();
         System.out.println("The number of inserted product : " + count);

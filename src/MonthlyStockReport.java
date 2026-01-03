@@ -179,7 +179,7 @@ public class MonthlyStockReport extends javax.swing.JFrame {
 
             int month = Month.valueOf(monthStr.toUpperCase()).getValue();
 
-            ArrayList<Product> list = DatabaseConnection.getMonthlyStock(month, year);
+            ArrayList<Product> list = DatabaseConnectionProduct.getMonthlyStock(month, year);
 
             // NO RECORD FOUND
             if (list.isEmpty()) {

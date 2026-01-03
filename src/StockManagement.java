@@ -348,7 +348,7 @@ public class StockManagement extends javax.swing.JFrame {
             }
             txtProductID.setEditable(false);
 
-            int row = DatabaseConnection.updateData(prod);
+            int row = DatabaseConnectionProduct.updateData(prod);
             if (row > 0) {
                 JOptionPane.showMessageDialog(this,
                         "Record updated successfully!",
@@ -391,12 +391,12 @@ public class StockManagement extends javax.swing.JFrame {
 
             // Search by Product ID
             if (rbProductID.isSelected()) {
-                prod = DatabaseConnection.searchID(keyword);
+                prod = DatabaseConnectionProduct.searchID(keyword);
                 txtProductID.setEditable(false);
 
             } // Search by Product Name
             else if (rbProductName.isSelected()) {
-                prod = DatabaseConnection.searchName(keyword);
+                prod = DatabaseConnectionProduct.searchName(keyword);
                 txtProductID.setEditable(false);
 
             } else {
@@ -437,7 +437,7 @@ public class StockManagement extends javax.swing.JFrame {
             TADisplay.setText("STOCK LIST\n-----------------------------");
 
             // get data from database
-            ArrayList<Product> productList = DatabaseConnection.readData();
+            ArrayList<Product> productList = DatabaseConnectionProduct.readData();
             String sortType = CBSort.getSelectedItem().toString();
 
             Collections.sort(productList, new ProductSort(sortType));
@@ -499,7 +499,7 @@ public class StockManagement extends javax.swing.JFrame {
                 return;
             }
 
-            DatabaseConnection.addRecord(prod);
+            DatabaseConnectionProduct.addRecord(prod);
 
             JOptionPane.showMessageDialog(this, "Record added successfully!", "Success",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -533,7 +533,7 @@ public class StockManagement extends javax.swing.JFrame {
                 return;
             }
 
-            int row = DatabaseConnection.DeleteRecord(DeleteProduct);
+            int row = DatabaseConnectionProduct.DeleteRecord(DeleteProduct);
 
             if (row > 0) {
                 JOptionPane.showMessageDialog(this,
