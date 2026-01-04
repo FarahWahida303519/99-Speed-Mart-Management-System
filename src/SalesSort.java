@@ -20,14 +20,13 @@ public class SalesSort implements Comparator<SalesReport> {
 
     @Override
     public int compare(SalesReport s1, SalesReport s2) {
-
-        // Sort by Invoice No
+        // Sort by Invoice Number (A → Z)
         if (sortType.equals("Invoice No")) {
             return s1.getInvoiceNo().compareTo(s2.getInvoiceNo());
         }
 
-        // Sort by Date (Newest first)
-        if (sortType.equals("Newest Date")) {
+        // Sort by Date (Latest first)
+        if (sortType.equals("Latest Date")) {
             return s2.getSaleDate().compareTo(s1.getSaleDate());
         }
 
@@ -37,12 +36,12 @@ public class SalesSort implements Comparator<SalesReport> {
         }
 
         // Sort by Total Amount (Highest first)
-        if (sortType.equals("Highest Total")) {
+        if (sortType.equals("Highest Amount")) {
             return Double.compare(s2.getTotalAmount(), s1.getTotalAmount());
         }
 
         // Sort by Total Amount (Lowest first)
-        if (sortType.equals("Lowest Total")) {
+        if (sortType.equals("Lowest Amount")) {
             return Double.compare(s1.getTotalAmount(), s2.getTotalAmount());
         }
 
