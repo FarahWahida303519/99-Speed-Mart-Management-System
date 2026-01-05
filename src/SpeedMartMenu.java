@@ -45,7 +45,7 @@ public class SpeedMartMenu extends javax.swing.JFrame {
             }
         });
 
-        btnCashierOperation.setBackground(new java.awt.Color(255, 204, 204));
+        btnCashierOperation.setBackground(new java.awt.Color(204, 204, 255));
         btnCashierOperation.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCashierOperation.setText("Cashier Operation");
         btnCashierOperation.addActionListener(new java.awt.event.ActionListener() {
@@ -54,7 +54,7 @@ public class SpeedMartMenu extends javax.swing.JFrame {
             }
         });
 
-        btnMonthlyStockReport.setBackground(new java.awt.Color(255, 204, 204));
+        btnMonthlyStockReport.setBackground(new java.awt.Color(204, 255, 204));
         btnMonthlyStockReport.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnMonthlyStockReport.setText("Monthly Stock Report");
         btnMonthlyStockReport.addActionListener(new java.awt.event.ActionListener() {
@@ -63,7 +63,7 @@ public class SpeedMartMenu extends javax.swing.JFrame {
             }
         });
 
-        btnMonthlySaleReport.setBackground(new java.awt.Color(255, 204, 204));
+        btnMonthlySaleReport.setBackground(new java.awt.Color(153, 255, 255));
         btnMonthlySaleReport.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnMonthlySaleReport.setText("Monthly Sale Report");
         btnMonthlySaleReport.addActionListener(new java.awt.event.ActionListener() {

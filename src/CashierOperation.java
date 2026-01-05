@@ -94,7 +94,7 @@ public class CashierOperation extends javax.swing.JFrame {
         lblCashReceived.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblCashReceived.setText("Cash Received ( RM ): ");
 
-        btnConfirmPayment.setBackground(new java.awt.Color(255, 204, 204));
+        btnConfirmPayment.setBackground(new java.awt.Color(0, 153, 153));
         btnConfirmPayment.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnConfirmPayment.setText("Confirm Payment");
         btnConfirmPayment.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +107,7 @@ public class CashierOperation extends javax.swing.JFrame {
         txtDisplayReceipt.setRows(5);
         jScrollPane1.setViewportView(txtDisplayReceipt);
 
-        btnDeleteItem.setBackground(new java.awt.Color(255, 204, 204));
+        btnDeleteItem.setBackground(new java.awt.Color(255, 51, 51));
         btnDeleteItem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDeleteItem.setText("Delete Item");
         btnDeleteItem.addActionListener(new java.awt.event.ActionListener() {
@@ -116,6 +116,7 @@ public class CashierOperation extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(255, 102, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton1.setText("Back To Menu");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +140,7 @@ public class CashierOperation extends javax.swing.JFrame {
         lblQuantity1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblQuantity1.setText("Product Name          :");
 
+        btnSearch.setBackground(new java.awt.Color(51, 255, 51));
         btnSearch.setText("Search Item");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +148,7 @@ public class CashierOperation extends javax.swing.JFrame {
             }
         });
 
-        btnReset.setBackground(new java.awt.Color(255, 204, 204));
+        btnReset.setBackground(new java.awt.Color(255, 204, 0));
         btnReset.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnReset.setText("Reset");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
@@ -155,6 +157,7 @@ public class CashierOperation extends javax.swing.JFrame {
             }
         });
 
+        btnResetOutput.setBackground(new java.awt.Color(51, 102, 255));
         btnResetOutput.setText("Reset Receipt");
         btnResetOutput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

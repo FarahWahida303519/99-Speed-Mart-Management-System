@@ -62,6 +62,7 @@ public class StockManagement extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        btnAdd.setBackground(new java.awt.Color(255, 153, 153));
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +86,7 @@ public class StockManagement extends javax.swing.JFrame {
         lblStockQuantity.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblStockQuantity.setText("Stock Quantity :");
 
+        btnUpdate.setBackground(new java.awt.Color(0, 204, 204));
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +104,7 @@ public class StockManagement extends javax.swing.JFrame {
             }
         });
 
+        btnClear.setBackground(new java.awt.Color(153, 153, 255));
         btnClear.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnClear.setText("Clear");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +124,7 @@ public class StockManagement extends javax.swing.JFrame {
         rbProductName.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         rbProductName.setText("Product Name");
 
+        btnSearch.setBackground(new java.awt.Color(51, 255, 51));
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -133,6 +137,7 @@ public class StockManagement extends javax.swing.JFrame {
         TADisplay.setRows(5);
         jScrollPane1.setViewportView(TADisplay);
 
+        btnBack.setBackground(new java.awt.Color(255, 255, 51));
         btnBack.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBack.setText("Back To Menu");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -144,6 +149,7 @@ public class StockManagement extends javax.swing.JFrame {
         lblStockQuantity1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblStockQuantity1.setText(" Date                  :");
 
+        btnDisplay.setBackground(new java.awt.Color(51, 153, 0));
         btnDisplay.setText("Display Record");
         btnDisplay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,8 +195,10 @@ public class StockManagement extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(rbProductID, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnSearch)
-                                    .addComponent(btnClear))
+                                    .addComponent(btnClear)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(9, 9, 9)
+                                        .addComponent(btnSearch)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
