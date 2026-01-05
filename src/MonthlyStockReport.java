@@ -208,10 +208,7 @@ public class MonthlyStockReport extends javax.swing.JFrame {
 
             // NO RECORD FOUND
             if (list.isEmpty()) {
-                JOptionPane.showMessageDialog(this,
-                        "No record found for the selected month and year.",
-                        "No Data",
-                        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"No record found for the selected month and year.","No Data",JOptionPane.INFORMATION_MESSAGE);
 
                 DefaultTableModel model = (DefaultTableModel) tblReport.getModel();
                 model.setRowCount(0);
@@ -234,16 +231,11 @@ public class MonthlyStockReport extends javax.swing.JFrame {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(this,
-                    "Failed to generate report.",
-                    "Error",
-                    JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Failed to generate report.","Error",JOptionPane.ERROR_MESSAGE);
         }
     }// GEN-LAST:event_btnGenerateReportActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
