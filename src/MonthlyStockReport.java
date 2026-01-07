@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author HP
@@ -22,6 +21,8 @@ public class MonthlyStockReport extends javax.swing.JFrame {
      */
     public MonthlyStockReport() {
         initComponents();
+        getContentPane().setBackground(new java.awt.Color(230, 240, 255));
+
     }
 
     /**
@@ -72,8 +73,9 @@ public class MonthlyStockReport extends javax.swing.JFrame {
         cbxSort.setBackground(new java.awt.Color(255, 204, 204));
         cbxSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Product Name", "Product ID", "Most Stock Quantity", "Least Stock Quantity", "Newest Date", "Oldest Date" }));
 
-        btnGenerateReport.setBackground(new java.awt.Color(153, 204, 255));
+        btnGenerateReport.setBackground(new java.awt.Color(51, 153, 255));
         btnGenerateReport.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnGenerateReport.setForeground(new java.awt.Color(255, 255, 255));
         btnGenerateReport.setText("Generate Report");
         btnGenerateReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,7 +83,9 @@ public class MonthlyStockReport extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setBackground(new java.awt.Color(51, 153, 255));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Back To Menu");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,10 +115,6 @@ public class MonthlyStockReport extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblMonthlyStockReport, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(131, 131, 131))
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -135,15 +135,18 @@ public class MonthlyStockReport extends javax.swing.JFrame {
                                 .addComponent(cbxYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(cbxSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(btnGenerateReport))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(jButton1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblMonthlyStockReport, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(131, 131, 131))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnGenerateReport)
+                        .addGap(191, 191, 191))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(194, 194, 194))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,13 +163,13 @@ public class MonthlyStockReport extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSort)
                     .addComponent(cbxSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
-                .addComponent(btnGenerateReport)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGenerateReport)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,7 +192,7 @@ public class MonthlyStockReport extends javax.swing.JFrame {
 
             // NO RECORD FOUND
             if (list.isEmpty()) {
-                JOptionPane.showMessageDialog(this,"No record found for the selected month and year.","No Data",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "No record found for the selected month and year.", "No Data", JOptionPane.INFORMATION_MESSAGE);
 
                 DefaultTableModel model = (DefaultTableModel) tblReport.getModel();
                 model.setRowCount(0);
@@ -201,22 +204,21 @@ public class MonthlyStockReport extends javax.swing.JFrame {
             model.setRowCount(0);
 
             for (Product p : list) {
-                model.addRow(new Object[] {
-                        p.getProductDate(),
-                        p.getProductID(),
-                        p.getProductName(),
-                        p.getProductQuantity(),
-                        p.getProductPrice()
+                model.addRow(new Object[]{
+                    p.getProductDate(),
+                    p.getProductID(),
+                    p.getProductName(),
+                    p.getProductQuantity(),
+                    p.getProductPrice()
                 });
             }
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(this,"Failed to generate report.","Error",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Failed to generate report.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }// GEN-LAST:event_btnGenerateReportActionPerformed
 
-  
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
