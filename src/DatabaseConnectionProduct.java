@@ -206,4 +206,26 @@ public class DatabaseConnectionProduct {
 
         return row;
     }
+
+    // ================= CHECK PRODUCT USED IN SALES =================
+    public static boolean productHasSales(String productID) throws SQLException {
+
+        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+
+        String sql = "SELECT COUNT(*) FROM sales WHERE ProductID = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, productID);
+
+        ResultSet rs = stmt.executeQuery();
+        rs.next();
+
+        boolean hasSales = rs.getInt(1) > 0;
+
+        rs.close();
+        stmt.close();
+        connection.close();
+
+        return hasSales;
+    }
+
 }
