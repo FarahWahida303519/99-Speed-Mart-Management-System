@@ -15,6 +15,7 @@ public class Product {
     private int productQuantity;
     private Date productDate;
 
+    // constructor
     public Product(String productID, String productName, double productPrice, int productQuantity, Date productDate) {
         this.productID = productID;
         this.productName = productName;

@@ -14,6 +14,7 @@ public class SalesSort implements Comparator<SalesReport> {
 
     private String sortType;
 
+    // constructor
     public SalesSort(String sortType) {
         this.sortType = sortType;
     }

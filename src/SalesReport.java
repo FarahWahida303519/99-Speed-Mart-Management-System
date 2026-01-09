@@ -33,7 +33,7 @@ public class SalesReport {
         return totalAmount;
     }
 
-    // Optional: simple display
+   
     @Override
     public String toString() {
         return String.format(
