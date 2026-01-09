@@ -414,7 +414,6 @@ public class StockManagement extends javax.swing.JFrame {
 
                 try {
                         initialize();
-                        //check if field is empty or not
                         if (txtProductID.getText().isEmpty()
                                         || txtProductName.getText().isEmpty()
                                         || txtProductPrice.getText().isEmpty()
@@ -424,15 +423,12 @@ public class StockManagement extends javax.swing.JFrame {
                                 JOptionPane.showMessageDialog(this, "Please fill in all fields.");
                                 return;
                         }
-                        //avoid id can be edit
                         txtProductID.setEditable(false);
 
-                        //update record in db
                         int row = DatabaseConnectionProduct.updateData(prod);
-                       
-                        //check status update or not
                         if (row > 0) {
-                                JOptionPane.showMessageDialog(this, "Record updated successfully!", "Success",JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(this, "Record updated successfully!", "Success",
+                                                JOptionPane.INFORMATION_MESSAGE);
                         } else {
                                 JOptionPane.showMessageDialog(this, "Update failed. Record not found.", "Error",
                                                 JOptionPane.ERROR_MESSAGE);

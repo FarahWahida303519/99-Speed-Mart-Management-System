@@ -92,8 +92,6 @@ public class DatabaseConnectionSales {
         // Use sql
         // Group rows that have the same invoice number and same date into ONE row.
         // retrives invoice,date only and with total sales based on the month and year
-        //DATE(SalesDateTime) AS SaleDate = extract date only reomve time blh filter based on month year nnti
-        
         String sql = "SELECT InvoiceNo, DATE(SalesDateTime) AS SaleDate, SUM(SubTotal) AS TotalAmount FROM sales "
                 // filter data based on month and year!
                 + "WHERE MONTH(SalesDateTime) = ? "
@@ -101,20 +99,22 @@ public class DatabaseConnectionSales {
                 + "GROUP BY InvoiceNo, DATE(SalesDateTime)";
 
         PreparedStatement stmt = connection.prepareStatement(sql);
-        //replace placeholder in db
         stmt.setInt(1, month);
         stmt.setInt(2, year);
 
-        ResultSet rs = stmt.executeQuery();//read/retrives data
+        ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
 
             String invoiceNo = rs.getString("InvoiceNo");
-            //extrac date only
+
             java.sql.Date saleDate = rs.getDate("SaleDate"); // report = DATE only
             double totalAmount = rs.getDouble("TotalAmount");
 
-            SalesReport report = new SalesReport(invoiceNo,saleDate,totalAmount);
+            SalesReport report = new SalesReport(
+                    invoiceNo,
+                    saleDate,
+                    totalAmount);
 
             reportList.add(report);
         }
