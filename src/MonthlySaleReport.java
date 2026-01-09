@@ -52,10 +52,10 @@ public class MonthlySaleReport extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); 
         jLabel1.setText("Monthly Sales Report");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); 
         jLabel2.setText("Month   : ");
 
         jComboBox1.setBackground(new java.awt.Color(255, 204, 204));

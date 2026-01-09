@@ -14,9 +14,11 @@ public class DatabaseConnectionProduct {
 
     public static ArrayList<Product> readData() throws SQLException {
 
+        //Create arraylist for product
         ArrayList<Product> productList = new ArrayList<>();
         Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
+        //sql statemetn here
         String sql = "SELECT * FROM product";
         PreparedStatement stmt = connection.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
@@ -28,13 +30,7 @@ public class DatabaseConnectionProduct {
             int productQuantity = rs.getInt(4);
             Date productDate = rs.getDate(5);
 
-            Product prod = new Product(
-                    productID,
-                    productName,
-                    productPrice,
-                    productQuantity,
-                    productDate);
-
+            Product prod = new Product(productID, productName, productPrice,productQuantity,productDate);
             productList.add(prod);
         }
 
