@@ -524,7 +524,7 @@ public class CashierOperation extends javax.swing.JFrame {
                         no++;
                 }
 
-                // TOTALS 
+                // TOTALS
                 double subtotal = calculateSubtotal();
                 double sst = calculateSST(subtotal);
                 double total = calculateTotal(subtotal, sst);
@@ -542,40 +542,40 @@ public class CashierOperation extends javax.swing.JFrame {
         // ConfirmPayment
         private void btnConfirmPaymentActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnConfirmPaymentActionPerformed
                 try {
-                    //check receipt empty or not
+                        // check receipt empty or not
                         if (salesList.isEmpty()) {
                                 JOptionPane.showMessageDialog(this, "No items in receipt", "Error",
                                                 JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
-                        //check if user enter or not cash
-                        //trim to remove extra space begin &last text
+                        // check if user enter or not cash
+                        // trim to remove extra space begin &last text
                         if (txtCashReceive.getText().trim().isEmpty()) {
                                 JOptionPane.showMessageDialog(this, "Please enter cash received", "Input Error",
                                                 JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
-                        //convert string to double
+                        // convert string to double
                         double cashReceived = Double.parseDouble(txtCashReceive.getText().trim());
 
-                        //use lambda to calculate 
+                        // use lambda to calculate
                         double subtotal = calculateSubtotal();
                         double sst = calculateSST(subtotal);
                         double total = calculateTotal(subtotal, sst);
 
-                        //check if user enter enough or not to pay the items
+                        // check if user enter enough or not to pay the items
                         if (cashReceived < total) {
                                 JOptionPane.showMessageDialog(this, "Insufficient cash", "Payment Error",
                                                 JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
-                        double balance = cashReceived - total;//cal balance
+                        double balance = cashReceived - total;// cal balance
 
-                        //Open Confirmation dialog
-                        //yes/no
+                        // Open Confirmation dialog
+                        // yes/no
                         int choice = JOptionPane.showConfirmDialog(this,
                                         String.format(
                                                         "Subtotal : RM %.2f%n"
@@ -592,11 +592,12 @@ public class CashierOperation extends javax.swing.JFrame {
                                 return;
                         }
 
-                        // Save sales + reduce stock in db 
+                        // Save sales + reduce stock in db
                         for (Sales s : salesList) {// Loop through each item in the list
-                            //call db method
-                                DatabaseConnectionSales.addRecord(s);//save rec
-                                DatabaseConnectionProduct.reduceStock(//update quantity (reduced based on quantity item)
+                                // call db method
+                                DatabaseConnectionSales.addRecord(s);// save rec
+                                DatabaseConnectionProduct.reduceStock(// update quantity (reduced based on quantity
+                                                                      // item)
                                                 s.getProductID(),
                                                 s.getQuantity());
                         }
@@ -615,13 +616,15 @@ public class CashierOperation extends javax.swing.JFrame {
                         invoiceNo = null;
                         txtCashReceive.setText("");
 
-                        JOptionPane.showMessageDialog(this,"Payment successful", "Success",JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Payment successful", "Success",
+                                        JOptionPane.INFORMATION_MESSAGE);
 
                 } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Cash received must be a valid number", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Cash received must be a valid number", "Input Error",
+                                        JOptionPane.ERROR_MESSAGE);
                         return;
                 } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this, e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
         }// GEN-LAST:event_btnConfirmPaymentActionPerformed
 
@@ -634,26 +637,33 @@ public class CashierOperation extends javax.swing.JFrame {
 
         // Delete
         private void btnDeleteItemActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDeleteItemActionPerformed
+
                 try {
                         if (salesList.isEmpty()) {
-                                JOptionPane.showMessageDialog(this, "No item to delete", "Error",
+                                JOptionPane.showMessageDialog(this,
+                                                "No item to delete", "Error",
                                                 JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
-                        String productDelete = txtProductName.getText().trim();
+                        // GET PRODUCT ID (NOT NAME!)
+                        String productDelete = lblID.getText().trim();
 
                         if (productDelete.isEmpty()) {
-                                JOptionPane.showMessageDialog(this, "Please enter product name to delete",
-                                                "Input Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this,
+                                                "Please search product first",
+                                                "Input Error",
+                                                JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
-                        int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this item?",
-                                        "Confirm Delete", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-                        if (choice != JOptionPane.YES_OPTION) {
+                        int choice = JOptionPane.showConfirmDialog(this,
+                                        "Are you sure you want to delete this item?",
+                                        "Confirm Delete",
+                                        JOptionPane.YES_NO_OPTION);
+
+                        if (choice != JOptionPane.YES_OPTION)
                                 return;
-                        }
 
                         boolean removed = false;
 
@@ -661,7 +671,7 @@ public class CashierOperation extends javax.swing.JFrame {
                         while (iterator.hasNext()) {
                                 Sales s = iterator.next();
 
-                                // mathicng with id
+                                // MATCH USING PRODUCT ID
                                 if (s.getProductID().equalsIgnoreCase(productDelete)) {
                                         iterator.remove();
                                         removed = true;
@@ -669,12 +679,14 @@ public class CashierOperation extends javax.swing.JFrame {
                                 }
                         }
 
-                        // not sucess to delete
                         if (!removed) {
-                                JOptionPane.showMessageDialog(this, "Item not found in receipt", "Error",
+                                JOptionPane.showMessageDialog(this,
+                                                "Item not found in receipt",
+                                                "Error",
                                                 JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
+
                         if (salesList.isEmpty()) {
                                 invoiceNo = null;
                                 txtDisplayReceipt.setText("");
@@ -682,29 +694,35 @@ public class CashierOperation extends javax.swing.JFrame {
                                 rebuildReceipt();
                         }
 
-                        JOptionPane.showMessageDialog(this, "Item deleted successfully", "Success",
+                        JOptionPane.showMessageDialog(this,
+                                        "Item deleted successfully",
+                                        "Success",
                                         JOptionPane.INFORMATION_MESSAGE);
 
                 } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
+                        JOptionPane.showMessageDialog(this,
+                                        e.getMessage(),
+                                        "Error",
                                         JOptionPane.ERROR_MESSAGE);
                 }
+
         }// GEN-LAST:event_btnDeleteItemActionPerformed
 
         private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSearchActionPerformed
                 try {
                         String productName = txtProductName.getText().trim();
 
-                        //check if input name empty
+                        // check if input name empty
                         if (productName.isEmpty()) {
-                                JOptionPane.showMessageDialog(this,"Please enter Product Name", "Input Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this, "Please enter Product Name", "Input Error",
+                                                JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
                         // search product name in db product
                         prod = DatabaseConnectionProduct.searchName(productName);
 
-                        //if not found
+                        // if not found
                         if (prod == null) {
                                 JOptionPane.showMessageDialog(this, "Product not found", "Error",
                                                 JOptionPane.ERROR_MESSAGE);
@@ -719,14 +737,14 @@ public class CashierOperation extends javax.swing.JFrame {
                                         JOptionPane.INFORMATION_MESSAGE);
 
                 } catch (SQLException ex) {
-                    //to show db error msg
+                        // to show db error msg
                         ex.printStackTrace();
                         JOptionPane.showMessageDialog(this, "Error retrieving product from database", "Database Error",
                                         JOptionPane.ERROR_MESSAGE);
                 }
         }// GEN-LAST:event_btnSearchActionPerformed
 
-        //to retun back to menu
+        // to retun back to menu
         private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
                 // TODO add your handling code here:
                 new SpeedMartMenu().setVisible(true);
@@ -735,37 +753,39 @@ public class CashierOperation extends javax.swing.JFrame {
 
         private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddItemActionPerformed
                 try {
-                    
-                        //check if product is search or not
+
+                        // check if product is search or not
                         if (prod == null) {
-                                JOptionPane.showMessageDialog(this, "Please search product first", "Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this, "Please search product first", "Error",
+                                                JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
-                        //chech empy or not
+                        // chech empy or not
                         if (txtQuantity.getText().trim().isEmpty()) {
-                                JOptionPane.showMessageDialog(this, "Please enter quantity", "Input Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this, "Please enter quantity", "Input Error",
+                                                JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
-                        
                         initializeSale();
 
-                        //check already generate or not invoice
+                        // check already generate or not invoice
                         if (invoiceNo == null) {
                                 invoiceNo = invoiceGen.generate();
                         }
 
-                        salesList.add(sales);//add record in list
+                        salesList.add(sales);// add record in list
 
                         rebuildReceipt();
 
-                        txtQuantity.setText("");//clear quatitny fiel for next input
+                        txtQuantity.setText("");// clear quatitny fiel for next input
 
                 } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Quantity must be a number", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Quantity must be a number", "Input Error",
+                                        JOptionPane.ERROR_MESSAGE);
                 } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this, e.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
         }// GEN-LAST:event_btnAddItemActionPerformed
 
