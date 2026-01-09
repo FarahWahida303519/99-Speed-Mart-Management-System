@@ -18,6 +18,7 @@ import java.util.ArrayList;
  * @author HP
  */
 public class DatabaseConnectionSales {
+
     private static final String URL = "jdbc:mysql://localhost:3306/99_speedmart_db";
     private static String USER = "root";
     private static String PASSWORD = "12345";
@@ -25,15 +26,20 @@ public class DatabaseConnectionSales {
     // READ DATA
     public static ArrayList<Sales> readData() throws SQLException {
 
+        // create list to store sales rec
         ArrayList<Sales> salesList = new ArrayList<>();
+        // connect db
         Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
 
+        // sql stmt to retrive
         String sql = "SELECT * FROM sales";
         PreparedStatement stmt = connection.prepareStatement(sql);
+        // excute query since use select
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
 
+            // retvs data each column
             String invoiceNo = rs.getString(1);
             String productID = rs.getString(2);
             int quantity = rs.getInt(3);
@@ -41,14 +47,8 @@ public class DatabaseConnectionSales {
             double subTotal = rs.getDouble(5);
             Timestamp saleDateTime = rs.getTimestamp(6); // DATETIME
 
-            Sales sale = new Sales(
-                    invoiceNo,
-                    productID,
-                    quantity,
-                    unitPrice,
-                    subTotal,
-                    saleDateTime);
-
+            // create obj sales
+            Sales sale = new Sales(invoiceNo, productID, quantity, unitPrice, subTotal, saleDateTime);
             salesList.add(sale);
         }
 
@@ -66,6 +66,7 @@ public class DatabaseConnectionSales {
 
         String sql = "INSERT INTO sales (InvoiceNo, ProductID, Quantity, UnitPrice, SubTotal, SalesDateTime) VALUES (?, ?, ?, ?, ?, ?)";
 
+        // replace place holder db with getter sales
         PreparedStatement stmt = connection.prepareStatement(sql);
         stmt.setString(1, sale.getInvoiceNo());
         stmt.setString(2, sale.getProductID());
@@ -82,8 +83,8 @@ public class DatabaseConnectionSales {
     }
 
     // MONTHLY SALES REPORT
-    public static ArrayList<SalesReport> getMonthlySales(int month, int year)
-            throws SQLException {
+    // with input parameterssssss
+    public static ArrayList<SalesReport> getMonthlySales(int month, int year) throws SQLException {
 
         ArrayList<SalesReport> reportList = new ArrayList<>();
         Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -91,6 +92,8 @@ public class DatabaseConnectionSales {
         // Use sql
         // Group rows that have the same invoice number and same date into ONE row.
         // retrives invoice,date only and with total sales based on the month and year
+        //DATE(SalesDateTime) AS SaleDate = extract date only reomve time blh filter based on month year nnti
+        
         String sql = "SELECT InvoiceNo, DATE(SalesDateTime) AS SaleDate, SUM(SubTotal) AS TotalAmount FROM sales "
                 // filter data based on month and year!
                 + "WHERE MONTH(SalesDateTime) = ? "
@@ -98,21 +101,20 @@ public class DatabaseConnectionSales {
                 + "GROUP BY InvoiceNo, DATE(SalesDateTime)";
 
         PreparedStatement stmt = connection.prepareStatement(sql);
+        //replace placeholder in db
         stmt.setInt(1, month);
         stmt.setInt(2, year);
 
-        ResultSet rs = stmt.executeQuery();
+        ResultSet rs = stmt.executeQuery();//read/retrives data
 
         while (rs.next()) {
 
             String invoiceNo = rs.getString("InvoiceNo");
+            //extrac date only
             java.sql.Date saleDate = rs.getDate("SaleDate"); // report = DATE only
             double totalAmount = rs.getDouble("TotalAmount");
 
-            SalesReport report = new SalesReport(
-                    invoiceNo,
-                    saleDate,
-                    totalAmount);
+            SalesReport report = new SalesReport(invoiceNo,saleDate,totalAmount);
 
             reportList.add(report);
         }

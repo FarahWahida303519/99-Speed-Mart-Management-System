@@ -47,7 +47,7 @@ public class Sales {
     @Override
     public String toString() {
         return String.format(
-                "%-12s %5d x RM %6.2f = RM %7.2f\n",
+                "%-12s %15d  RM %6.2f  RM %7.2f\n",
                 productID,
                 quantity,
                 unitPrice,

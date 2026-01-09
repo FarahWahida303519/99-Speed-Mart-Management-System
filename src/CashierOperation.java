@@ -398,7 +398,7 @@ public class CashierOperation extends javax.swing.JFrame {
                 txtDisplayReceipt.setText("");
         }// GEN-LAST:event_btnResetOutputActionPerformed
 
-        // Sales / cashier variables
+        // initialize variables
         private String invoiceNo;
         private String productID;
         private int quantity;
@@ -513,7 +513,8 @@ public class CashierOperation extends javax.swing.JFrame {
 
                 txtDisplayReceipt.append(String.format("%-15s %15s %10s %10s%n",
                                 "Item", "Qty", "Price", "Subtotal"));
-                txtDisplayReceipt.append("\n------------------------------------------------------------------------------------\n\n");
+                txtDisplayReceipt.append(
+                                "\n------------------------------------------------------------------------------------\n\n");
 
                 int no = 1;
 
@@ -523,50 +524,58 @@ public class CashierOperation extends javax.swing.JFrame {
                         no++;
                 }
 
-                // ===== TOTALS =====
+                // TOTALS 
                 double subtotal = calculateSubtotal();
                 double sst = calculateSST(subtotal);
                 double total = calculateTotal(subtotal, sst);
 
-                txtDisplayReceipt.append("\n------------------------------------------------------------------------------------\n\n");
+                txtDisplayReceipt.append(
+                                "\n------------------------------------------------------------------------------------\n\n");
                 txtDisplayReceipt.append(String.format("Subtotal         : RM %.2f%n", subtotal));
                 txtDisplayReceipt.append(String.format("SST (6%%)        : RM %.2f%n", sst));
                 txtDisplayReceipt.append(String.format("TOTAL            : RM %.2f%n", total));
-                txtDisplayReceipt.append("\n------------------------------------------------------------------------------------\n");
-                
+                txtDisplayReceipt.append(
+                                "\n------------------------------------------------------------------------------------\n");
 
         }
 
-        // =======ConfirmPayment
+        // ConfirmPayment
         private void btnConfirmPaymentActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnConfirmPaymentActionPerformed
                 try {
+                    //check receipt empty or not
                         if (salesList.isEmpty()) {
                                 JOptionPane.showMessageDialog(this, "No items in receipt", "Error",
                                                 JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
+                        //check if user enter or not cash
+                        //trim to remove extra space begin &last text
                         if (txtCashReceive.getText().trim().isEmpty()) {
                                 JOptionPane.showMessageDialog(this, "Please enter cash received", "Input Error",
                                                 JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
+                        //convert string to double
                         double cashReceived = Double.parseDouble(txtCashReceive.getText().trim());
 
+                        //use lambda to calculate 
                         double subtotal = calculateSubtotal();
                         double sst = calculateSST(subtotal);
                         double total = calculateTotal(subtotal, sst);
 
+                        //check if user enter enough or not to pay the items
                         if (cashReceived < total) {
                                 JOptionPane.showMessageDialog(this, "Insufficient cash", "Payment Error",
                                                 JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
-                        double balance = cashReceived - total;
+                        double balance = cashReceived - total;//cal balance
 
-                        // Confirmation dialog
+                        //Open Confirmation dialog
+                        //yes/no
                         int choice = JOptionPane.showConfirmDialog(this,
                                         String.format(
                                                         "Subtotal : RM %.2f%n"
@@ -583,19 +592,22 @@ public class CashierOperation extends javax.swing.JFrame {
                                 return;
                         }
 
-                        // Save sales + reduce stock
-                        for (Sales s : salesList) {
-                                DatabaseConnectionSales.addRecord(s);
-                                DatabaseConnectionProduct.reduceStock(
+                        // Save sales + reduce stock in db 
+                        for (Sales s : salesList) {// Loop through each item in the list
+                            //call db method
+                                DatabaseConnectionSales.addRecord(s);//save rec
+                                DatabaseConnectionProduct.reduceStock(//update quantity (reduced based on quantity item)
                                                 s.getProductID(),
                                                 s.getQuantity());
                         }
 
                         // Final receipt footer
-                        txtDisplayReceipt.append("------------------------------------------------------------------------------------\n\n");
+                        txtDisplayReceipt.append(
+                                        "------------------------------------------------------------------------------------\n\n");
                         txtDisplayReceipt.append(String.format("Cash Received : RM %.2f%n", cashReceived));
                         txtDisplayReceipt.append(String.format("Balance       : RM %.2f%n", balance));
-                        txtDisplayReceipt.append("------------------------------------------------------------------------------------\n");
+                        txtDisplayReceipt.append(
+                                        "------------------------------------------------------------------------------------\n");
                         txtDisplayReceipt.append("THANK YOU • PLEASE COME AGAIN\n");
 
                         // Reset transaction
@@ -603,18 +615,13 @@ public class CashierOperation extends javax.swing.JFrame {
                         invoiceNo = null;
                         txtCashReceive.setText("");
 
-                        JOptionPane.showMessageDialog(this,
-                                        "Payment successful",
-                                        "Success",
-                                        JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(this,"Payment successful", "Success",JOptionPane.INFORMATION_MESSAGE);
 
                 } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Cash received must be a valid number", "Input Error",
-                                        JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Cash received must be a valid number", "Input Error", JOptionPane.ERROR_MESSAGE);
                         return;
                 } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this, e.getMessage(), "Error",
-                                        JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
                 }
         }// GEN-LAST:event_btnConfirmPaymentActionPerformed
 
@@ -688,17 +695,16 @@ public class CashierOperation extends javax.swing.JFrame {
                 try {
                         String productName = txtProductName.getText().trim();
 
+                        //check if input name empty
                         if (productName.isEmpty()) {
-                                JOptionPane.showMessageDialog(this,
-                                                "Please enter Product Name",
-                                                "Input Error",
-                                                JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this,"Please enter Product Name", "Input Error", JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
                         // search product name in db product
                         prod = DatabaseConnectionProduct.searchName(productName);
 
+                        //if not found
                         if (prod == null) {
                                 JOptionPane.showMessageDialog(this, "Product not found", "Error",
                                                 JOptionPane.ERROR_MESSAGE);
@@ -713,12 +719,14 @@ public class CashierOperation extends javax.swing.JFrame {
                                         JOptionPane.INFORMATION_MESSAGE);
 
                 } catch (SQLException ex) {
+                    //to show db error msg
                         ex.printStackTrace();
                         JOptionPane.showMessageDialog(this, "Error retrieving product from database", "Database Error",
                                         JOptionPane.ERROR_MESSAGE);
                 }
         }// GEN-LAST:event_btnSearchActionPerformed
 
+        //to retun back to menu
         private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton1ActionPerformed
                 // TODO add your handling code here:
                 new SpeedMartMenu().setVisible(true);
@@ -727,36 +735,37 @@ public class CashierOperation extends javax.swing.JFrame {
 
         private void btnAddItemActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAddItemActionPerformed
                 try {
+                    
+                        //check if product is search or not
                         if (prod == null) {
-                                JOptionPane.showMessageDialog(this, "Please search product first",
-                                                "Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this, "Please search product first", "Error", JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
+                        //chech empy or not
                         if (txtQuantity.getText().trim().isEmpty()) {
-                                JOptionPane.showMessageDialog(this, "Please enter quantity",
-                                                "Input Error", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(this, "Please enter quantity", "Input Error", JOptionPane.ERROR_MESSAGE);
                                 return;
                         }
 
+                        
                         initializeSale();
 
+                        //check already generate or not invoice
                         if (invoiceNo == null) {
                                 invoiceNo = invoiceGen.generate();
                         }
 
-                        salesList.add(sales);
+                        salesList.add(sales);//add record in list
 
                         rebuildReceipt();
 
-                        txtQuantity.setText("");
+                        txtQuantity.setText("");//clear quatitny fiel for next input
 
                 } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Quantity must be a number",
-                                        "Input Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, "Quantity must be a number", "Input Error", JOptionPane.ERROR_MESSAGE);
                 } catch (Exception e) {
-                        JOptionPane.showMessageDialog(this, e.getMessage(),
-                                        "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(this, e.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
                 }
         }// GEN-LAST:event_btnAddItemActionPerformed
 

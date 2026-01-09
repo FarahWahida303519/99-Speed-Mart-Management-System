@@ -33,6 +33,7 @@ public class MonthlySaleReport extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -52,10 +53,10 @@ public class MonthlySaleReport extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Monthly Sales Report");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Month   : ");
 
         jComboBox1.setBackground(new java.awt.Color(255, 204, 204));
@@ -66,8 +67,7 @@ public class MonthlySaleReport extends javax.swing.JFrame {
         jLabel3.setText("Year   :");
 
         jComboBox2.setBackground(new java.awt.Color(255, 204, 204));
-        jComboBox2.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "2023", "2024", "2025", "2026", "2027", " " }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2025", "2026", "2027", " " }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -223,6 +223,7 @@ public class MonthlySaleReport extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Converts month string to month int for db filtering
     private int getMonthNumber(String month) {
         switch (month) {
             case "January":
@@ -270,6 +271,7 @@ public class MonthlySaleReport extends javax.swing.JFrame {
 
     private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnGenerateActionPerformed
         try {
+
             String monthName = jComboBox1.getSelectedItem().toString();
             int month = getMonthNumber(monthName);
             int year = Integer.parseInt(jComboBox2.getSelectedItem().toString());
@@ -286,7 +288,7 @@ public class MonthlySaleReport extends javax.swing.JFrame {
             calTotal add = (a, b) -> a + b;
             double totalMonthlySales = 0.0;
 
-            // insert data
+            // insert data into table
             for (SalesReport r : reportList) {
                 model.addRow(new Object[] {
                         r.getInvoiceNo(),

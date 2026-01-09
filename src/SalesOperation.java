@@ -12,7 +12,7 @@ interface InvoiceGenerator {
     String generate();
 }
 
-// for calculation (price × quantity, tax, etc.)
+// for calculation (price *quantity, tax)
 @FunctionalInterface
 interface calTotal {
     double calculate(double a, double b);

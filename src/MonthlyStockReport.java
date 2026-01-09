@@ -65,7 +65,7 @@ public class MonthlyStockReport extends javax.swing.JFrame {
         lblYear.setText("Year   :");
 
         cbxYear.setBackground(new java.awt.Color(255, 204, 204));
-        cbxYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024", "2025", "2026", " " }));
+        cbxYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2025", "2026", "2027", " " }));
 
         lblSort.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         lblSort.setText("Sort by  :");
